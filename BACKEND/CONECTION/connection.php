@@ -1,10 +1,7 @@
 <?php
-require_once "../CONFIG/config.php";
+require_once dirname(__DIR__) . "../CONFIG/config.php";
 
 class conn{
-
-
-
 
 
 
