@@ -5,7 +5,7 @@ CREATE TABLE Usuarios (
     telefono VARCHAR(15),
     password VARCHAR(256) NOT NULL,
     Saldo DECIMAL (10,2),
-    Num_cuenta VARCHAR(15),
+    Num_cuenta VARCHAR(15)
     
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE Transacciones (
     id_cuenta_destino INT,
     monto DECIMAL(10, 2) NOT NULL,
     fecha_hora DATETIME,
-    razon VARCHARD(100) NOT NULL,
+    razon VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_cuenta_origen) REFERENCES Cuentas(id_cuenta),
     FOREIGN KEY (id_cuenta_destino) REFERENCES Cuentas(id_cuenta)
 );
