@@ -1,3 +1,6 @@
+CREATE DATABASE eBanking;
+USE eBanking;
+
 CREATE TABLE Usuarios (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nombre_completo VARCHAR(100) NOT NULL,
