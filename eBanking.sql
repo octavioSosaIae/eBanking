@@ -7,8 +7,6 @@ CREATE TABLE Usuarios (
     email VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(15),
     password VARCHAR(256) NOT NULL,
-    Saldo DECIMAL (10,2),
-    Num_cuenta VARCHAR(15)
     
 );
 
