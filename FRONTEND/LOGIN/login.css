@@ -10,14 +10,28 @@ body {
     /* background-image: url("../img/Captura de pantalla 2024-05-13 145709.png");  */ 
   
   }
+  *{
+    box-sizing: border-box;
+  }
   
   .formLogin {
     background-color: #fff;
-    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     border: 5px solid rgb(224, 21, 21); /*borde del di del formulario */
+    padding: 40px;
+    max-width: 600px;
+
+  }
+  .formLoginRegistro{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 5px solid rgb(224, 21, 21);
+    padding: 40px;
+    max-width: 600px;
 
   }
   
@@ -25,6 +39,9 @@ body {
     margin-bottom: 20px;
   }
   
+  input[type="nombre"],
+  input[type="apellido"],
+  input[type="numerodecuenta"],
   input[type="email"],
   input[type="password"] {
     width: 100%;
@@ -53,59 +70,22 @@ body {
   /*border-radius: 50%;  Hace la imagen circular */
   margin-bottom: 20px; /* Espacio debajo de la imagen */
  }
+ .panelvista{
+  height: 600px;
+  width: 400px;
+  position: relative;
+  overflow: hidden;
+ }
+ #contenedorformulario{
+  height: 600px;
+  width: 800px;
+  position: absolute;
+  display: flex;
+  left: -400px;
+  transition: all .4s;
+ }
+ #contenedorformulario > div{
+  width: 400px;
+ }
 
- 
- body {
-  font-family: sans-serif; /* Define la fuente utilizada para todo el texto en la página. */
-  background-color: #f4f4f4; /* Establece un color de fondo gris claro para la página. */
-  display: flex; /* Utiliza flexbox para organizar el contenido. */
-  justify-content: center; /* Centra horizontalmente el contenido dentro del cuerpo. */
-  align-items: center; /* Centra verticalmente el contenido dentro del cuerpo. */
-  min-height: 100vh; /* Asegura que el cuerpo tenga al menos la altura completa de la ventana gráfica. */
-  margin: 0; /* Elimina el margen por defecto del cuerpo. */
-  /* background-image: url("../img/Captura de pantalla 2024-05-13 145709.png"); */ 
-  /* Comentado: Define una imagen de fondo para la página. Se encuentra comentado para que no se aplique. */
-}
 
-.formLogin {
-  background-color: #fff; /* Establece un fondo blanco para el formulario. */
-  padding: 30px; /* Añade un espacio interno (padding) de 30 píxeles alrededor del contenido del formulario. */
-  border-radius: 10px; /* Redondea las esquinas del formulario con un radio de 10 píxeles. */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera alrededor del formulario para darle profundidad. */
-  text-align: center; /* Centra el texto y otros contenidos dentro del formulario. */
-  border: 5px solid rgb(224, 21, 21); /* Define un borde rojo de 5 píxeles alrededor del formulario. */
-}
-
-h1 {
-  margin-bottom: 20px; /* Añade un espacio de 20 píxeles debajo del encabezado para separarlo del siguiente contenido. */
-}
-
-input[type="email"],
-input[type="password"] {
-  width: 100%; /* Hace que los campos de entrada ocupen todo el ancho disponible. */
-  padding: 12px; /* Añade un espacio interno de 12 píxeles dentro de los campos de entrada. */
-  margin: 10px 0; /* Añade un espacio de 10 píxeles arriba y abajo de los campos de entrada. */
-  border: 1px solid #fd0202; /* Establece un borde rojo alrededor de los campos de entrada. */
-  border-radius: 4px; /* Redondea las esquinas de los campos de entrada con un radio de 4 píxeles. */
-  box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total de los campos de entrada. */
-}
-
-button {
-  background-color: red; /* Establece un color de fondo rojo para el botón. */
-  color: white; /* Establece el color del texto del botón en blanco. */
-  padding: 12px 20px; /* Añade un espacio interno de 12 píxeles arriba/abajo y 20 píxeles a los lados del botón. */
-  margin: 10px 0; /* Añade un espacio de 10 píxeles arriba y abajo del botón. */
-  border: none; /* Elimina cualquier borde predeterminado del botón. */
-  border-radius: 4px; /* Redondea las esquinas del botón con un radio de 4 píxeles. */
-  cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón para indicar que es clicable. */
-  width: 48%; /* Establece el ancho del botón al 48% del contenedor que lo contiene. */
-}
-
-/* Estilo para la imagen de perfil */
-.img {
-  width: 100px; /* Define un ancho de 100 píxeles para la imagen. */
-  height: 100px; /* Define una altura de 100 píxeles para la imagen. */
-  /*border-radius: 50%;  Hace la imagen circular */
-  /* Comentado: Si se activa, este estilo haría que la imagen tuviera bordes redondeados convirtiéndola en circular. */
-  margin-bottom: 20px; /* Añade un espacio de 20 píxeles debajo de la imagen para separarla del siguiente contenido. */
-}
