@@ -24,9 +24,12 @@ function login()
 {
 
     $user = $_POST['user'];
+    $email = $_POST['email'];
     $pass = $_POST['pass'];
 
-    $result = (new user())->login($user, $pass);
+
+
+    $result = (new user())->login($user, $email, $pass);
     echo json_encode($result);
 };
 
@@ -35,9 +38,9 @@ function register()
 {
 
     $user = $_POST['user'];
+    $email = $_POST['email'];
     $pass = $_POST['pass'];
 
-    $result = (new user())->register($user, $pass);
+    $result = (new user())->register($user, $pass, $email);
     echo json_encode($result);
 };
-

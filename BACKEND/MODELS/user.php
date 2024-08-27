@@ -5,21 +5,21 @@ require_once "../CONECTION/connection.php";
 class user
 {
 
-    function register($user, $pass)                //  funcion para registrar usuarios
+    function register($username, $email, $pass)                //  funcion para registrar usuarios
     {
         $connection = new conn;
         $conn = $connection->connect();
-        $sql = "INSERT INTO usuarios VALUES(0,'$user','$pass');";
+        $sql = "INSERT INTO users VALUES(NULL,'$username','$email','$pass');";
         $response = $conn->query($sql);
         return $response;
     }
 
 
-    function login($user, $pass)                //  funcion para logear usuarios
+    function login($username,$email, $pass)                //  funcion para logear usuarios
     {
         $connection = new conn;
         $conn = $connection->connect();
-        $sql = "SELECT * FROM usuarios WHERE user='$user' AND pass='$pass';";
+        $sql = "SELECT * FROM users WHERE username='$username' OR email='$email' AND password='$pass';";
         $response = $conn->query($sql);
         $users = $response->fetch_all(MYSQLI_ASSOC);
         return $users;

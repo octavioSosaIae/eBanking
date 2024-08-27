@@ -1,29 +1,28 @@
 CREATE DATABASE eBanking;
 USE eBanking;
 
-CREATE TABLE Usuarios (
-    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_completo VARCHAR(100) NOT NULL,
+CREATE TABLE users (
+    id_user INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    telefono VARCHAR(15),
-    password VARCHAR(256) NOT NULL,
+    password VARCHAR(256) NOT NULL
     
 );
 
-CREATE TABLE Cuentas (
-    id_cuenta INT PRIMARY KEY AUTO_INCREMENT,
-    id_usuario INT NOT NULL,
-    saldo DECIMAL(10,2),
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
+CREATE TABLE accounts (
+    id_account INT PRIMARY KEY AUTO_INCREMENT,
+    id_user INT NOT NULL,
+    funds DECIMAL(10,2),
+    FOREIGN KEY (id_user) REFERENCES users(id_user)
 );
 
-CREATE TABLE Transacciones (
-    id_transaccion INT PRIMARY KEY AUTO_INCREMENT,
-    id_cuenta_origen INT,
-    id_cuenta_destino INT,
-    monto DECIMAL(10, 2) NOT NULL,
-    fecha_hora DATETIME,
-    razon VARCHAR(100) NOT NULL,
-    FOREIGN KEY (id_cuenta_origen) REFERENCES Cuentas(id_cuenta),
-    FOREIGN KEY (id_cuenta_destino) REFERENCES Cuentas(id_cuenta)
+CREATE TABLE transactions (
+    id_transaction INT PRIMARY KEY AUTO_INCREMENT,
+    id_origin_account INT,
+    id_account_destination INT,
+    amount DECIMAL(10, 2) NOT NULL,
+    datetime DATETIME,
+    reason VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_origin_account) REFERENCES accounts(id_account),
+    FOREIGN KEY (id_account_destination) REFERENCES accounts(id_account)
 );
