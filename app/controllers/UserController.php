@@ -23,16 +23,30 @@ switch ($function) {
 
 
 class UserController{
+    
 function login()
 {
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    //Falta validar los datos!
+    $validateData = new ValidateData;
 
-    $result = (new User())->login($username, $password);
-    echo json_encode($result);
+    $user = [
+    "email" => $_POST['email'],
+    "password" => $_POST['password']
+    ];
+
+        $sanitizeData = $validateData->sanitizeData($user);
+
+    $result = (new User())->login($sanitizeData['email'], $sanitizeData['password']);
+      
+    if($result == true){
+        $msg = "exito";
+    } else {
+        $msg = "no exito";
+    }
+
+    echo json_encode($msg);
+
 }
 
 
