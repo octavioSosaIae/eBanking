@@ -8,8 +8,8 @@ class conn
 
         $host = "localhost";
         $user = "root";
-        $pass = "";
-        $db = "ebanking";
+        $pass = "Sizeron";
+        $db = "eBanking";
         $puerto = 3306;
 
         $mysqli = new mysqli($host, $user, $pass, $db, $puerto);
