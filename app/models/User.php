@@ -21,14 +21,18 @@ class User
     }
 
     //  Función para login de usuarios
-    function login($username, $email, $pass)
+    function login($username, $pass)
     {
         $connection = new conn;
         $conn = $connection->connect();
-        $sql = "SELECT * FROM users WHERE (username='$username' OR email='$email') AND password='$pass';";
+        try{
+        $sql = "SELECT * FROM users WHERE username='$username' AND password='$pass';";
         $response = $conn->query($sql);
         $users = $response->fetch_all(MYSQLI_ASSOC);
         return $users;
+        } catch (Exception){
+            return "Error";
+        }
     }
 
 }

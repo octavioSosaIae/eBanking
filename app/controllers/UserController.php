@@ -4,35 +4,36 @@ require_once "../models/User.php";
 require_once "../core/validateData.php";
 
 $function = $_GET['function'];
+$userController = new UserController;
 
 switch ($function) {
 
     case "login":
 
-        login();
+        $userController->login();
 
         break;
 
     case "register":
 
-        register();
+        $userController->register();
 
         break;
 };
 
 
+class UserController{
 function login()
 {
 
-    $user = $_POST['user'];
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
+    //Falta validar los datos!
 
-
-    $result = (new user())->login($user, $email, $pass);
+    $result = (new User())->login($username, $password);
     echo json_encode($result);
-};
+}
 
 
 function register()
@@ -59,4 +60,6 @@ function register()
     }
 
     echo json_encode($msg);
-};
+}
+
+}
