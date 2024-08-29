@@ -13,7 +13,6 @@ class User
         try {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);       
             $sql = "INSERT INTO users (username, password_hash, email, full_name, phone) VALUES('$username','$hashedPassword', '$email','$full_name', '$phone');";
-
             $response = $conn->query($sql);
             return $response;
         } catch (Exception $e) {
@@ -22,18 +21,28 @@ class User
     }
 
     //  Función para login de usuarios
-    function login($email, $pass)
+    function login($email, $password)
     {
         $connection = new conn;
         $conn = $connection->connect();
         try {
-            $sql = "SELECT * FROM users WHERE email='$email' AND password_hash='$pass';";
+   
+            $sql = "SELECT * FROM users WHERE email='$email';";
+        
             $response = $conn->query($sql);
-            $users = $response->fetch_assoc();
-            if ($users == NULL) {
-                throw new Exception("Error al loguear el usuario: Usuario o contraseña incorrecto");
+            $user = $response->fetch_assoc();
+            if (!password_verify($password,$user['password_hash']))
+            {
+                throw new Exception("Error al loguear el usuario: email o contraseña incorrecto");
+                
             }
-            return $users;
+
+          
+             session_start();
+              $_SESSION['user_id'] = $user['user_id'];
+
+
+            return $user;
         } catch (Exception $e) {
             throw new Exception("Error al loguear el usuario: " . $e->getMessage());
         }

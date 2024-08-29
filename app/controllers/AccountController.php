@@ -1,7 +1,6 @@
 <?php
 
 require_once "../core/Response.php";
-require_once "../core/validateData.php";
 require_once "../models/Account.php";
 
 $function = $_GET['function'];
@@ -16,6 +15,12 @@ switch ($function) {
 
         break;
 
+        case "recharge":
+
+            $accountController->recharge();
+    
+            break;
+
 };
 
 
@@ -24,26 +29,16 @@ class AccountController
     function create()
     {
         try {
-            $validateData = new ValidateData;
             $response = new Response;
+            
+  
 
-
-            $user = [
-                "username" => $_POST['username'],
-                "email" => $_POST['email'],
-                "password" => $_POST['password'],
-                "full_name" => $_POST['full_name'],
-                "phone" => $_POST['phone']
-            ];
-
-            $sanitizeData = $validateData->sanitizeData($user);
-
-            $result = (new User())->register($sanitizeData['username'], $sanitizeData['email'], $sanitizeData['password'], $sanitizeData['full_name'], $sanitizeData['phone']);
+            $result = (new Account())->create();
 
 
             // Responder con el usuario creado
             $response->setStatusCode(201);
-            $response->setBody(['message' => 'Usuario creado exitosamente']);
+            $response->setBody(['message' => 'Cuenta creada exitosamente']);
         } catch (Exception $e) {
 
             // Responder con un error
@@ -51,6 +46,32 @@ class AccountController
             $response->setBody(['error' => $e->getMessage()]);
         };
         $response->send();
+    }
+
+    function recharge()
+    {
+        try {
+            $response = new Response;
+            
+            $user_id = $_POST ['user_id'];
+            $amount = $_POST['balance'];
+
+
+            $result = (new Account())->rechargeBalance($amount, $user_id);
+
+            // Responder con el usuario creado
+            $response->setStatusCode(201);
+            $response->setBody(['message' => 'Cuenta creada exitosamente']);
+        } catch (Exception $e) {
+
+            // Responder con un error
+            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
+            $response->setBody(['error' => $e->getMessage()]);
+        };
+        $response->send();
+
+
+
     }
 
 
