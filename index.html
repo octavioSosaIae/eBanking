@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard E-Banking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>TB - Transaction Bank</h2>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#transferencias">Realizar Transferencias</a></li>
+                <li><a href="#abrir-cuenta">Abrir Nueva Cuenta</a></li>
+                <li><a href="#listar-cuentas">Listar Cuentas</a></li>
+                <li><a href="#agenda">Agenda Cuentas Amigas</a></li>
+                <li><a href="#configuracion">Configuración</a></li>
+            </ul>
+        </nav>
+        <div class="codedev-text">
+            <p>Una compañia de</p>
+            <p>CODEDEV UY Solutions</p>
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Barra superior -->
+        <header class="top-bar">
+            <span class="user-detail">Bienvenido, Usuario</span>
+            <div class="top-bar-icons">
+                <span class="icon">🔔</span>
+                <span class="icon">⚙️</span>
+            </div>
+        </header>
+
+        <!-- Dashboard General -->
+        <section id="dashboard" class="dashboard">
+            <h1>Resumen de Cuentas</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Cuenta "Ahorro 1"</h2>
+                    <p>$ 10,000.00</p>
+                </div>
+                <div class="card">
+                    <h2>Cuenta "Ahorro 2"</h2>
+                    <p>$ 5,000.00</p>
+                </div>
+            </div>
+            <br>
+
+            <h1>Resumen últimas Transacciones</h1>
+            <div>
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Id Transacción</th>
+                            <th>Fecha y Hora</th>
+                            <th>Monto</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>2024-08-28 14:23</td>
+                            <td>$500.00</td>
+                            <td>Depósito</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>2024-08-28 15:45</td>
+                            <td>$200.00</td>
+                            <td>Retiro</td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>2024-08-29 09:10</td>
+                            <td>$1,000.00</td>
+                            <td>Transferencia</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <br>
+
+        <section id="transferencias">
+            <h2>Realizar Transferencia</h2>
+            <form class="transfer-form">
+                <div class="form-group">
+                    <label for="cuenta-origen">Cuenta Origen</label>
+                    <select id="cuenta-origen" name="cuenta-origen" required>
+                        <option value="">Seleccione su cuenta</option>
+                        <option value="cuenta-1">Cuenta "Ahorro 1" - $xxxx</option>
+                        <option value="cuenta-2">Cuenta "Ahorro 2" - $xxxx</option>
+                    </select>
+                </div>
+        
+                <div class="form-group">
+                    <label for="cuenta-destino">Cuenta Destino</label>
+                    <input type="text" id="cuenta-destino" name="cuenta-destino" placeholder="Número de cuenta destino" required>
+                </div>
+        
+                <div class="form-group">
+                    <label for="nombre-destinatario">Nombre Destinatario</label>
+                    <input type="text" id="nombre-destinatario" name="nombre-destinatario" placeholder="Nombre del destinatario" required>
+                </div>
+        
+                <div class="form-group">
+                    <label for="email-destinatario">Email Destinatario</label>
+                    <input type="email" id="email-destinatario" name="email-destinatario" placeholder="Email del destinatario" required>
+                </div>
+        
+                <div class="form-group">
+                    <button type="submit">Enviar Transferencia</button>
+                </div>
+            </form>
+        </section>
+
+        <br>
+
+
+<section id="abrir-cuenta">
+    <h2>Abrir una Nueva Cuenta</h2>
+    <form class="transfer-form">
+        <div class="form-group">
+            <div class="terms">
+                <p>
+                    Al abrir una nueva cuenta, usted acepta los siguientes términos y condiciones:
+                    <ul>
+                        <li>El banco puede modificar las tarifas y cargos según sea necesario.</li>
+                        <li>El titular de la cuenta es responsable de mantener la confidencialidad de sus credenciales.</li>
+                        <li>El banco no se hace responsable por transacciones no autorizadas si el titular no protege su información.</li>
+                        <li>Se aplican cargos por sobregiro y otros servicios adicionales.</li>
+                    </ul>
+                    Para más detalles, consulte nuestro <a href="#">acuerdo completo de términos y condiciones</a>.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="aceptar-terminos" name="aceptar-terminos" required>
+                Acepto los términos y condiciones
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Abrir Cuenta</button>
+        </div>
+    </form>
+</section>
+
+
+<section id="listado-cuentas">
+    <h2>Listado de Cuentas</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Titular</th>
+                <th>Número de Cuenta</th>
+                <th>Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Juan Pérez</td>
+                <td>1234-5678-9012</td>
+                <td>$10,000.00</td>
+            </tr>
+            <tr>
+                <td>María García</td>
+                <td>9876-5432-1098</td>
+                <td>$5,500.00</td>
+            </tr>
+            <tr>
+                <td>Carlos López</td>
+                <td>1122-3344-5566</td>
+                <td>$3,250.00</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+<section id="editar-perfil">
+    <h2>Editar Perfil del Usuario</h2>
+    <form class="transfer-form">
+        <div class="form-group">
+            <label for="nombre-completo">Nombre Completo</label>
+            <input type="text" id="nombre-completo" name="nombre-completo" placeholder="Nombre Completo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre-usuario">Nombre de Usuario</label>
+            <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre de Usuario" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Guardar Cambios</button>
+        </div>
+    </form>
+</section>
+
+
+
+<section id="restablecer-contrasena">
+    <h2>Restablecer Contraseña</h2>
+    <form class="transfer-form">
+        <div class="form-group">
+            <label for="contrasena-actual">Contraseña Actual</label>
+            <input type="password" id="contrasena-actual" name="contrasena-actual" placeholder="Contraseña Actual" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nueva-contrasena">Nueva Contraseña</label>
+            <input type="password" id="nueva-contrasena" name="nueva-contrasena" placeholder="Nueva Contraseña" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmar-contrasena">Confirmar Nueva Contraseña</label>
+            <input type="password" id="confirmar-contrasena" name="confirmar-contrasena" placeholder="Confirmar Nueva Contraseña" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Restablecer Contraseña</button>
+        </div>
+    </form>
+</section>
+
+
+        
+
+    </main>
+</body>
+</html>
