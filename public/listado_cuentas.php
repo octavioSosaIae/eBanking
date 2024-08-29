@@ -35,5 +35,5 @@ require_once __DIR__ . "/assets/template/header.php";
 </section>
 
 <?php
-        require_once __DIR__ . "/assets/template/footer.php";
-        ?>
+    require_once __DIR__ . "/assets/template/footer.php";
+?>
