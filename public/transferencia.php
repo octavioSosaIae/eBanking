@@ -27,8 +27,8 @@ require_once __DIR__ . "/assets/template/header.php";
                 </div>
         
                 <div class="form-group">
-                    <label for="email-destinatario">Email Destinatario</label>
-                    <input type="email" id="email-destinatario" name="email-destinatario" placeholder="Email del destinatario" required>
+                    <label for="email-destinatario">Descripcion:</label>
+                    <input type="descripcion" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                 </div>
         
                 <div class="form-group">
