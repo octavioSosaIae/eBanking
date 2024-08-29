@@ -2,6 +2,7 @@
 
 require_once "../models/User.php";
 require_once "../core/validateData.php";
+require_once "../core/Response.php";
 
 $function = $_GET['function'];
 $userController = new UserController;
@@ -19,61 +20,103 @@ switch ($function) {
         $userController->register();
 
         break;
+        case "updatePassword":
+
+            $userController->updatePassword();
+    
+            break;
 };
 
 
-class UserController{
-    
-function login()
+class UserController
 {
 
+    function login()
+    {
 
-    $validateData = new ValidateData;
 
-    $user = [
-    "email" => $_POST['email'],
-    "password" => $_POST['password']
-    ];
+        $validateData = new ValidateData;
+        $response = new Response;
 
-        $sanitizeData = $validateData->sanitizeData($user);
+        try {
 
-    $result = (new User())->login($sanitizeData['email'], $sanitizeData['password']);
-      
-    if($result == true){
-        $msg = "exito";
-    } else {
-        $msg = "no exito";
+            $user = [
+                "email" => $_POST['email'],
+                "password" => $_POST['password']
+            ];
+
+            $sanitizeData = $validateData->sanitizeData($user);
+
+            $result = (new User())->login($sanitizeData['email'], $sanitizeData['password']);
+
+            // Responder con el usuario logueado
+            $response->setStatusCode(200);
+            $response->setBody(['message' => 'Usuario logueado exitosamente']);
+        } catch (Exception $e) {
+
+            // Responder con un error
+            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
+            $response->setBody(['error' => $e->getMessage()]);
+        };
+        $response->send();
     }
 
-    echo json_encode($msg);
 
-}
+    function register()
+    {
+        try {
+            $validateData = new ValidateData;
+            $response = new Response;
 
 
-function register()
-{
+            $user = [
+                "username" => $_POST['username'],
+                "email" => $_POST['email'],
+                "password" => $_POST['password'],
+                "full_name" => $_POST['full_name'],
+                "phone" => $_POST['phone']
+            ];
 
-    $validateData = new ValidateData;
+            $sanitizeData = $validateData->sanitizeData($user);
 
-    $user = [
-    "username" => $_POST['username'],
-    "email" => $_POST['email'],
-    "password" => $_POST['password'],
-    "full_name" => $_POST['full_name'],
-    "phone" => $_POST['phone']
-    ];
+            $result = (new User())->register($sanitizeData['username'], $sanitizeData['email'], $sanitizeData['password'], $sanitizeData['full_name'], $sanitizeData['phone']);
 
-    $sanitizeData = $validateData->sanitizeData($user);
 
-    $result = (new User())->register($sanitizeData['username'], $sanitizeData['email'], $sanitizeData['password'], $sanitizeData['full_name'], $sanitizeData['phone']);
-      
-    if($result == true){
-        $msg = "exito";
-    } else {
-        $msg = "no exito";
+            // Responder con el usuario creado
+            $response->setStatusCode(201);
+            $response->setBody(['message' => 'Usuario creado exitosamente']);
+        } catch (Exception $e) {
+
+            // Responder con un error
+            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
+            $response->setBody(['error' => $e->getMessage()]);
+        };
+        $response->send();
     }
 
-    echo json_encode($msg);
-}
+    function updatePassword()
+    {
 
+        try {
+            $response = new Response;
+
+            $user = [
+                "user_id" => $_POST['user_id'],
+                "new_password" => $_POST['new_password'],
+                "current_password" => $_POST['current_password']
+            ];
+
+            $result = (new User())->updatePassword($user['current_password'], $user['new_password'], $user['user_id']);
+
+            // Responder con el usuario creado
+            $response->setStatusCode(201);
+            $response->setBody(['message' => 'Usuario creado exitosamente']);
+        } catch (Exception $e) {
+
+            // Responder con un error
+            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
+            $response->setBody(['error' => $e->getMessage()]);
+        };
+        $response->send();
+    }
 }
