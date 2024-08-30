@@ -77,5 +77,29 @@ class Account
 
     }
 
+
+    function getAccountsList()
+    {
+        
+        $connection = new conn;
+        $conn = $connection->connect();
+
+        try {
+
+            session_start();
+            $user_id = $_SESSION['user_id'];
+            
+            $sql = "SELECT * FROM accounts WHERE user_id = '$user_id';";
+            $response = $conn->query($sql);
+            $result = $response->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            throw new Exception("Error al obtener las cuentas del usuario: " . $e->getMessage());
+        }
+
+
+
+    }
+
    
 }

@@ -15,12 +15,17 @@ switch ($function) {
 
         break;
 
-        case "recharge":
+    case "recharge":
 
-            $accountController->recharge();
-    
-            break;
+        $accountController->recharge();
 
+        break;
+
+    case "getAccounts":
+
+        $accountController->getAccounts();
+
+        break;
 };
 
 
@@ -30,8 +35,8 @@ class AccountController
     {
         try {
             $response = new Response;
-            
-  
+
+
 
             $result = (new Account())->create();
 
@@ -52,11 +57,11 @@ class AccountController
     {
         try {
             $response = new Response;
-            
-            $account_id = $_POST ['account_id'];
+
+            $account_id = $_POST['account_id'];
             $amount = $_POST['balance'];
 
-    
+
 
             $result = (new Account())->rechargeBalance($account_id, $amount);
 
@@ -70,12 +75,25 @@ class AccountController
             $response->setBody(['error' => $e->getMessage()]);
         };
         $response->send();
-
-
-
     }
 
+    function getAccounts()
+    {
+        try {
+            $response = new Response;
+
+            $result = (new Account())->getAccountsList();
 
 
+            // Responder con el usuario creado
+            $response->setStatusCode(200);
+            $response->setBody(['message' => 'Cuentas encontradas exitosamente', 'data:' => $result]);
+        } catch (Exception $e) {
 
+            // Responder con un error
+            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
+            $response->setBody(['error' => $e->getMessage()]);
+        };
+        $response->send();
+    }
 }
