@@ -11,7 +11,7 @@ class User
         $connection = new conn;
         $conn = $connection->connect();
         try {
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);       
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $sql = "INSERT INTO users (username, password_hash, email, full_name, phone) VALUES('$username','$hashedPassword', '$email','$full_name', '$phone');";
             $response = $conn->query($sql);
             return $response;
@@ -26,20 +26,18 @@ class User
         $connection = new conn;
         $conn = $connection->connect();
         try {
-   
+
             $sql = "SELECT * FROM users WHERE email='$email';";
-        
+
             $response = $conn->query($sql);
             $user = $response->fetch_assoc();
-            if (!password_verify($password,$user['password_hash']))
-            {
+            if (!password_verify($password, $user['password_hash'])) {
                 throw new Exception("Error al loguear el usuario: email o contraseña incorrecto");
-                
             }
 
-          
-             session_start();
-              $_SESSION['user_id'] = $user['user_id'];
+
+            session_start();                             // Empiezo una sesion para guardar el ID de el usuario para utilizarlo en el modelo de Account
+            $_SESSION['user_id'] = $user['user_id'];
 
 
             return $user;
@@ -71,25 +69,23 @@ class User
 
         try {
             // Verificar la contraseña actual
-  
-            
+
+
             $connection = new conn;
             $conn = $connection->connect();
 
             $sql = "SELECT password_hash FROM users WHERE user_id = '$userId'";
             $response = $conn->query($sql);
             $result = $response->fetch_assoc();
-            if ($result == NULL){
+            if ($result == NULL) {
 
                 throw new Exception("No se encontro la contraseña del usuario");
-
-            }else{
-                if(!password_verify($currentPassword,$result['password_hash'])){
+            } else {
+                if (!password_verify($currentPassword, $result['password_hash'])) {
                     throw new Exception("La contraseña actual no coincide");
-                    
                 }
             }
-            
+
             $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);                      // para hashear la contraseña 
             $sql = "UPDATE users SET password_hash = '$hashedPassword' WHERE user_id = '$userId'";
             $response = $conn->query($sql);
@@ -99,7 +95,4 @@ class User
             throw new Exception("Error al actualizar la contraseña: " . $e->getMessage());
         }
     }
-
-       
-
 }

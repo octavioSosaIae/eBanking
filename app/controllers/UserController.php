@@ -109,7 +109,7 @@ class UserController
             $result = (new User())->updatePassword($user['current_password'], $user['new_password'], $user['user_id']);
 
             // Responder con el usuario creado
-            $response->setStatusCode(201);
+            $response->setStatusCode(200);
             $response->setBody(['message' => 'Usuario creado exitosamente']);
         } catch (Exception $e) {
 

@@ -33,30 +33,33 @@ class Account
 
 
 
-    function rechargeBalance($user_id, $amount)
+    function rechargeBalance($account_id, $amount)
     {
         $connection = new conn;
         $conn = $connection->connect();
 
 
         try {
-
-            session_start();
-            $user_id = $_SESSION['user_id'];
-
-            $currentBalance = $this->getBalance($user_id);
+    
+            $currentBalance = $this->getBalance($account_id);
             $newBalance = $currentBalance['balance'] + $amount;
-            $sql = "UPDATE accounts SET balance = '$newBalance' WHERE user_id = '$user_id';";
+            $sql = "UPDATE accounts SET balance = '$newBalance' WHERE account_id = '$account_id';";
             $response = $conn->query($sql);
-            $result = $response->fetch_assoc();
-            return $result;
+            
+            if(!$response){
+
+                return false;
+                
+            }
+            return $response;
+            
         } catch (Exception $e) {
             throw new Exception("Error al recargar la cuenta: " . $e->getMessage());
         }
     }
 
 
-    function getBalance($user_id)
+    function getBalance($account_id)
     {
 
         $connection = new conn;
@@ -64,7 +67,7 @@ class Account
 
 
         try {
-            $sql = "SELECT AMOUNT FROM accounts WHERE user_id = '$user_id';";
+            $sql = "SELECT balance FROM accounts WHERE account_id = '$account_id';";
             $response = $conn->query($sql);
             $result = $response->fetch_assoc();
             return $result;

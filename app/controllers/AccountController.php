@@ -53,15 +53,16 @@ class AccountController
         try {
             $response = new Response;
             
-            $user_id = $_POST ['user_id'];
+            $account_id = $_POST ['account_id'];
             $amount = $_POST['balance'];
 
+    
 
-            $result = (new Account())->rechargeBalance($amount, $user_id);
+            $result = (new Account())->rechargeBalance($account_id, $amount);
 
             // Responder con el usuario creado
-            $response->setStatusCode(201);
-            $response->setBody(['message' => 'Cuenta creada exitosamente']);
+            $response->setStatusCode(200);
+            $response->setBody(['message' => 'Cuenta cargada exitosamente']);
         } catch (Exception $e) {
 
             // Responder con un error
