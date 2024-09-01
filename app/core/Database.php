@@ -8,7 +8,7 @@ class conn
 
         $host = "localhost";
         $user = "root";
-        $pass = "Sizeron";
+        $pass = "";
         $db = "eBanking";
         $puerto = 3306;
 
