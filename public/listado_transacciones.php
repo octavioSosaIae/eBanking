@@ -7,7 +7,7 @@ require_once __DIR__ . "/assets/template/header.php";
             
             <h1>Resumen últimas Transacciones</h1>
             <div>
-                <table class="transaction-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Id Transacción</th>

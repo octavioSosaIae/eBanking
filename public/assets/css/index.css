@@ -34,22 +34,18 @@
     text-align: center;
  }
  
- 
  .logo {
     text-align: center;
     margin-bottom: 20px;
  }
  
- 
  .menu ul {
     list-style-type: none;
  }
  
- 
  .menu ul li {
     margin: 10px 0;
  }
- 
  
  .menu ul li a {
     color: #FFFFFF;
@@ -59,12 +55,10 @@
     border-radius: 5px;
  }
  
- 
  .menu ul li a:hover {
     background-color: #FFCDD2;
     color: #B22222;
  }
- 
  
  .sidebar .codedev-text {
     position: fixed;
@@ -74,15 +68,12 @@
     font-weight: bold;
     font-size: 16px;
  }
- 
- 
 
 .main-content {
     margin-left: 250px;
     padding: 20px;
     width: calc(100% - 250px);
  }  
- 
  
  .top-bar {
     background-color: #FFCDD2;
@@ -93,23 +84,11 @@
     margin-bottom: 20px;
  }
  
- 
  .top-bar .user-detail {
     font-size: 18px;
  }
- 
  
  .top-bar-icons .icon {
     margin-left: 20px;
     font-size: 18px;
  }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 

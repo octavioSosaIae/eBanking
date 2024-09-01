@@ -10,23 +10,16 @@ $transactionController = new TransactionController;
 switch ($function) {
 
     case "register":
-
         $transactionController->register();
-
         break;
 
     case "getTransactions":
-
         $transactionController->getTransactions();
-
         break;
     case "getTransactionsById":
-
         $transactionController->getTransactionsById();
-
         break;
-};
-
+}
 
 class TransactionController
 {
@@ -35,7 +28,6 @@ class TransactionController
         try {
             $validateData = new ValidateData;
             $response = new Response;
-
 
             $transaction = [
                 "from_account_id" => $_POST['from_account_id'],
@@ -46,39 +38,44 @@ class TransactionController
 
             $sanitizeData = $validateData->sanitizeData($transaction);
 
-            $result = (new Transaction())->register($transaction['from_account_id'], $transaction['to_account_id'], $transaction['amount'], $transaction['description']);
+            (new Transaction())->register($sanitizeData['from_account_id'], $sanitizeData['to_account_id'], $sanitizeData['amount'], $sanitizeData['description']);
 
-
-            // Responder con la transaccion registrada
             $response->setStatusCode(201);
-            $response->setBody(['message' => 'Transaccion registrada correctamente']);
+            $response->setBody([
+                'success' => true,
+                'message' => 'Transaccion registrada correctamente.'
+            ]);
         } catch (Exception $e) {
-
-            // Responder con un error
-            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
-            $response->setBody(['error' => $e->getMessage()]);
-        };
+            $response->setStatusCode(400);
+            $response->setBody([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
+        ;
         $response->send();
     }
 
     function getTransactions()
     {
-
         try {
             $response = new Response;
 
             $result = (new Transaction())->getTransactions();
 
-
-            // Responder con el usuario creado
             $response->setStatusCode(200);
-            $response->setBody(['message' => 'Transacciones encontradas exitosamente', 'data:' => $result]);
+            $response->setBody([
+                'success' => true,
+                'message' => 'Transacciones encontradas exitosamente.',
+                'data' => $result
+            ]);
         } catch (Exception $e) {
-
-            // Responder con un error
-            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
-            $response->setBody(['error' => $e->getMessage()]);
-        };
+            $response->setStatusCode(400);
+            $response->setBody([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
         $response->send();
     }
 
@@ -92,16 +89,20 @@ class TransactionController
 
             $result = (new Transaction())->getTransactionsById($account_id);
 
-
-            // Responder con el usuario creado
             $response->setStatusCode(200);
-            $response->setBody(['message' => 'Transacciones encontradas exitosamente', 'data:' => $result]);
+            $response->setBody([
+                'success' => true,
+                'message' => 'Transacciones encontradas exitosamente.',
+                'data' => $result
+            ]);
         } catch (Exception $e) {
 
-            // Responder con un error
-            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
-            $response->setBody(['error' => $e->getMessage()]);
-        };
+            $response->setStatusCode(400);
+            $response->setBody([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
         $response->send();
     }
 }

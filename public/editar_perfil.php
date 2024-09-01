@@ -6,7 +6,7 @@ require_once __DIR__ . "/assets/template/header.php";
 
 <section id="editar-perfil">
     <h2>Editar Perfil del Usuario</h2>
-    <form class="transfer-form">
+    <form class="form-style">
         <div class="form-group">
             <label for="nombre-completo">Nombre Completo</label>
             <input type="text" id="nombre-completo" name="nombre-completo" placeholder="Nombre Completo" required>
@@ -35,7 +35,7 @@ require_once __DIR__ . "/assets/template/header.php";
 <br>
 <section id="restablecer-contrasena">
     <h2>Restablecer Contraseña</h2>
-    <form class="transfer-form">
+    <form class="form-style">
         <div class="form-group">
             <label for="contrasena-actual">Contraseña Actual</label>
             <input type="password" id="contrasena-actual" name="contrasena-actual" placeholder="Contraseña Actual" required>

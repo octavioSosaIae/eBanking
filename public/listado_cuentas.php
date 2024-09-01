@@ -6,7 +6,7 @@ require_once __DIR__ . "/assets/template/header.php";
 
 <section id="listado-cuentas">
     <h2>Listado de Cuentas</h2>
-    <table class="styled-table">
+    <table class="table">
         <thead>
             <tr>
                 <th>Titular</th>

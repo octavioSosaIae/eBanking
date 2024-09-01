@@ -5,7 +5,7 @@ require_once __DIR__ . "/assets/template/header.php";
 
 <section id="abrir-cuenta">
     <h2>Abrir una Nueva Cuenta</h2>
-    <form class="transfer-form">
+    <form class="form-style" id="newAccount">
         <div class="form-group">
             <div class="terms">
                 <p>
@@ -33,6 +33,8 @@ require_once __DIR__ . "/assets/template/header.php";
         </div>
     </form>
 </section>
+
+<script src="assets/js/newAccount.js"></script>
 
 <?php
     require_once __DIR__ . "/assets/template/footer.php";

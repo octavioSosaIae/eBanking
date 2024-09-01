@@ -5,18 +5,20 @@
  
  
  .card-container {
-    display: flex;
-    justify-content: space-around;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   gap: 16px;
  }
  
  
  .card {
-    background-color: #FFFFFF;
-    border: 2px solid #B22222;
-    border-radius: 8px;
-    padding: 20px;
-    width: 30%;
-    text-align: center;
+   background-color: #FFFFFF;
+   border: 2px solid #B22222;
+   border-radius: 8px;
+   padding: 20px;
+   width: calc(25% - 16px);
+   text-align: center;
  }
  
  
@@ -33,53 +35,53 @@
  }
  
  
- .transaction-table {
+ .table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
  }
  
  
- .transaction-table thead {
+ .table thead {
     background-color: #B22222;
     color: #FFFFFF;
  }
  
  
- .transaction-table th,
- .transaction-table td {
+ .table th,
+ .table td {
     padding: 15px;
-    text-align: left;
+    text-align: center;
     border-bottom: 2px solid #F8F8F8;
  }
  
  
- .transaction-table th {
+ .table th {
     font-weight: bold;
  }
  
  
- .transaction-table tbody tr {
+ .table tbody tr {
     background-color: #FFFFFF;
  }
  
  
- .transaction-table tbody tr:nth-child(even) {
+ .table tbody tr:nth-child(even) {
     background-color: #FFCDD2;
  }
  
  
- .transaction-table tbody tr:hover {
+ .table tbody tr:hover {
     background-color: #F1F1F1;
  }
  
  
- .transaction-table td {
+ .table td {
     color: #333333;
  }
  
  
- .transfer-form {
+ .form-style {
     max-width: 500px;
     margin: 20px auto;
     padding: 20px;
@@ -169,48 +171,3 @@
  .terms a:hover {
     text-decoration: underline;
  }
- 
- 
- .styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 18px;
-    text-align: left;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
- }
- 
- 
- .styled-table thead tr {
-    background-color: #B22222;
-    color: #ffffff;
-    text-align: left;
- }
- 
- 
- .styled-table th,
- .styled-table td {
-    padding: 12px 15px;
- }
- 
- 
- .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
- }
- 
- 
- .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
- }
- 
- 
- .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #B22222;
- }
- 
- 
- .styled-table tbody tr:hover {
-    background-color: #f5f5f5;
- }
- 
- 

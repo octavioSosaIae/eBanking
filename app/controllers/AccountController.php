@@ -10,23 +10,18 @@ $accountController = new AccountController;
 switch ($function) {
 
     case "create":
-
         $accountController->create();
-
         break;
 
     case "recharge":
-
         $accountController->recharge();
-
         break;
 
     case "getAccounts":
-
         $accountController->getAccounts();
-
         break;
-};
+}
+;
 
 
 class AccountController
@@ -36,20 +31,21 @@ class AccountController
         try {
             $response = new Response;
 
+            (new Account())->create();
 
-
-            $result = (new Account())->create();
-
-
-            // Responder con el usuario creado
             $response->setStatusCode(201);
-            $response->setBody(['message' => 'Cuenta creada exitosamente']);
+            $response->setBody([
+                'success' => true,
+                'message' => 'Cuenta creada exitosamente.',
+            ]);
         } catch (Exception $e) {
+            $response->setStatusCode(400);
+            $response->setBody([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
 
-            // Responder con un error
-            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
-            $response->setBody(['error' => $e->getMessage()]);
-        };
         $response->send();
     }
 
@@ -59,21 +55,28 @@ class AccountController
             $response = new Response;
 
             $account_id = $_POST['account_id'];
-            $amount = $_POST['balance'];
+            $amount = $_POST['amount'];
 
 
 
             $result = (new Account())->rechargeBalance($account_id, $amount);
 
-            // Responder con el usuario creado
-            $response->setStatusCode(200);
-            $response->setBody(['message' => 'Cuenta cargada exitosamente']);
-        } catch (Exception $e) {
+            if (!$result) {
+                throw new Exception("Error al recargar la cuenta");
+            }
 
-            // Responder con un error
-            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
-            $response->setBody(['error' => $e->getMessage()]);
-        };
+            $response->setStatusCode(200);
+            $response->setBody([
+                'success' => true,
+                'message' => 'Cuenta cargada exitosamente.',
+            ]);
+        } catch (Exception $e) {
+            $response->setStatusCode(400);
+            $response->setBody([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
         $response->send();
     }
 
@@ -85,15 +88,20 @@ class AccountController
             $result = (new Account())->getAccountsList();
 
 
-            // Responder con el usuario creado
             $response->setStatusCode(200);
-            $response->setBody(['message' => 'Cuentas encontradas exitosamente', 'data:' => $result]);
+            $response->setBody([
+                'success' => true,
+                'message' => 'Cuentas encontradas exitosamente.',
+                'data' => $result
+            ]);
         } catch (Exception $e) {
 
-            // Responder con un error
-            $response->setStatusCode(400); // Código de estado para solicitud incorrecta
-            $response->setBody(['error' => $e->getMessage()]);
-        };
+            $response->setStatusCode(400);
+            $response->setBody([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
         $response->send();
     }
 }

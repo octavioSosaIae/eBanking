@@ -6,7 +6,7 @@ require_once __DIR__ . "/assets/template/header.php";
 <!-- aqui inicia la pagina de transfrrencias -->
         <section id="transferencias">
             <h2>Realizar Transferencia</h2>
-            <form class="transfer-form">
+            <form class="form-style">
                 <div class="form-group">
                     <label for="cuenta-origen">Cuenta Origen</label>
                     <select id="cuenta-origen" name="cuenta-origen" required>

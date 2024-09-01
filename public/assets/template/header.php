@@ -1,5 +1,12 @@
+<?php
+session_start();
+if(!(isset($_SESSION['user_id'])) && !(isset($_SESSION['full_name']))){
+    header("Location: http://localhost/eBanking/app/controllers/UserController.php?function=logout");}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +14,7 @@
     <link rel="stylesheet" href="../public/assets/css/index.css">
     <link rel="stylesheet" href="../public/assets/css/style.css">
 </head>
+
 <body>
     <!-- Barra lateral -->
     <aside class="sidebar">
@@ -33,9 +41,10 @@
     <main class="main-content">
         <!-- Barra superior -->
         <header class="top-bar">
-            <span class="user-detail">Bienvenido, Usuario</span>
+            <span class="user-detail">Bienvenido, <?php echo $_SESSION["full_name"]; ?></span>
             <div class="top-bar-icons">
                 <span class="icon">🔔</span>
                 <span class="icon">⚙️</span>
+                <span class="icon"><a href="http://localhost/eBanking/app/controllers/UserController.php?function=logout">🚪</a></span>
             </div>
         </header>

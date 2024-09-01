@@ -19,6 +19,8 @@ class Transaction
             $status = NULL;
             if ($resultAmountOrigin['balance'] < $amount) {
                 $status = "Rechazada";
+            } else {
+                $status = "Completada";
             }
 
             $sql = "INSERT INTO transactions (from_account_id, to_account_id, amount, description, status) VALUES('$fromAccountId','$toAccountId', '$amount','$description', '$status');";
@@ -65,17 +67,33 @@ class Transaction
 
             $sql = "SELECT * FROM accounts WHERE user_id = '$user_id';";
             $response = $conn->query($sql);
-            $result = $response->fetch_all(MYSQLI_ASSOC);
+            $accounts = $response->fetch_all(MYSQLI_ASSOC);
 
-            $transactions = [];
+            $transactions = []; // Array asociativo para guardar las transacciones
+            $transaction_ids = []; // Array asociativo para verificar IDs únicos de transacciones
 
-            foreach ($result as $account) {
+
+            foreach ($accounts as $account) {
+
                 $account_id = $account['account_id'];
-                $sql = "SELECT * FROM transactions WHERE from_account_id = '$account_id'  OR to_account_id = '$account_id';";
+
+                $sql = "SELECT * FROM transactions WHERE from_account_id = '$account_id'  OR to_account_id = '$account_id' ORDER BY transaction_date DESC LIMIT 10;";
+
                 $response = $conn->query($sql);
-                $result = $response->fetch_all(MYSQLI_ASSOC);
-                array_push($transactions, $result);
+
+                $account_transactions = $response->fetch_all(MYSQLI_ASSOC);
+
+                foreach ($account_transactions as $transaction) {
+                    $transaction_id = $transaction['transaction_id'];
+                    //Si no existe el id de la transacción en el array TRANSACTIONS[], entonces lo agrega
+                    if (!isset($transaction_ids[$transaction_id])) { //Verificar que en el array de IDs transacciones no existe el indice ID que se está iterando
+                        $transaction_ids[$transaction_id] = true; // Marcar el ID como utilizado
+                        $transactions[] = $transaction; // Agregar la transacción al array numérico
+                    }                
+                }
             }
+
+
             return $transactions;
         } catch (Exception $e) {
             throw new Exception("Error al obtener las cuentas del usuario: " . $e->getMessage());

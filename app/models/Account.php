@@ -9,22 +9,26 @@ class Account
     //  Función para crear una cuenta
     function create()
     {
-        $connection = new conn;
-        $conn = $connection->connect();
-
-
         try {
 
-            
-         session_start();
-         $user_id = $_SESSION['user_id'];
+            $connection = new conn;
+            $conn = $connection->connect();
 
+            session_start();
+            $user_id = $_SESSION['user_id'];
 
-        
-            $sql = "INSERT INTO accounts (user_id) VALUES('$user_id');";
-
+            $sql = "INSERT INTO accounts (user_id) VALUES($user_id);";
             $response = $conn->query($sql);
+
+            // Obtener el id del ultimo registro insertado
+            $last_id = $conn->insert_id;
+
+            $account_id = 'ACC' . str_pad($last_id, 6, '0', STR_PAD_LEFT);
+            $sql = "UPDATE accounts SET account_id = '$account_id' WHERE id = '$last_id'";
+            $response = $conn->query($sql);
+
             return $response;
+
         } catch (Exception $e) {
             throw new Exception("Error al crear la cuenta: " . $e->getMessage());
         }
@@ -40,22 +44,22 @@ class Account
 
 
         try {
-    
+
             $currentBalance = $this->getBalance($account_id);
             $newBalance = $currentBalance['balance'] + $amount;
             $sql = "UPDATE accounts SET balance = '$newBalance' WHERE account_id = '$account_id';";
             $response = $conn->query($sql);
-            
-            if(!$response){
 
-                return false;
-                
-            }
-            return $response;
+            $filas_afectadas = $conn->affected_rows;
             
+            if (!($filas_afectadas > 0)) {
+                return false;
+            }
+            return true;
         } catch (Exception $e) {
             throw new Exception("Error al recargar la cuenta: " . $e->getMessage());
         }
+        
     }
 
 
@@ -80,7 +84,7 @@ class Account
 
     function getAccountsList()
     {
-        
+
         $connection = new conn;
         $conn = $connection->connect();
 
@@ -88,7 +92,7 @@ class Account
 
             session_start();
             $user_id = $_SESSION['user_id'];
-            
+
             $sql = "SELECT * FROM accounts WHERE user_id = '$user_id';";
             $response = $conn->query($sql);
             $result = $response->fetch_all(MYSQLI_ASSOC);
@@ -101,5 +105,5 @@ class Account
 
     }
 
-   
+
 }
