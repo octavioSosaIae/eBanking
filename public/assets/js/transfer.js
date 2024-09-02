@@ -1,6 +1,6 @@
-const accountsSelectList = document.querySelector("#cuenta-origen");
+const accountsSelectList = document.querySelector("#from_account_id");
 const formNewTransfer = document.querySelector("#newTransfer");
-const accountToTransferInput = document.querySelector("#cuenta-destino");
+const accountToTransferInput = document.querySelector("#to_account_id");
 const accountClientNameInput = document.querySelector("#nombre-destinatario");
 
 newTransfer();
@@ -15,13 +15,24 @@ function newTransfer() {
     formNewTransfer.onsubmit = async (e) => {
         e.preventDefault();
 
-        let url = 'http://localhost/eBanking/app/controllers/AccountController.php?function=create';
+        let transferData = new FormData(formNewTransfer);
 
-        let response = await fetch(url);
+        let url = 'http://localhost/eBanking/app/controllers/TransactionController.php?function=register';
+
+        let config = {
+            method: 'POST',
+            body: transferData
+        };
+
+        let response = await fetch(url, config);
 
         const result = await response.json();
 
-        alert(result.message);
+        if(result.success){
+            alert(result.message);
+        } else {
+            alert(result.error)
+        }
     }
 
 }

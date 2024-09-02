@@ -8,15 +8,15 @@ require_once __DIR__ . "/assets/template/header.php";
     <h2>Realizar Transferencia</h2>
     <form class="form-style" id="newTransfer">
         <div class="form-group">
-            <label for="cuenta-origen">Cuenta Origen</label>
-            <select id="cuenta-origen" name="cuenta-origen" required>
+            <label for="from_account_id">Cuenta Origen</label>
+            <select id="from_account_id" name="from_account_id" required>
                 <option value="">Seleccione su cuenta</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="cuenta-destino">Cuenta Destino</label>
-            <input type="text" id="cuenta-destino" name="cuenta-destino" placeholder="Número de cuenta destino"
+            <label for="to_account_id">Cuenta Destino</label>
+            <input type="text" id="to_account_id" name="to_account_id" placeholder="Número de cuenta destino"
                 required>
         </div>
 
@@ -26,8 +26,13 @@ require_once __DIR__ . "/assets/template/header.php";
         </div>
 
         <div class="form-group">
-            <label for="email-destinatario">Descripcion:</label>
-            <input type="descripcion" id="descripcion" name="descripcion" placeholder="Descripcion" required>
+            <label for="description">Descripcion:</label>
+            <input type="text" id="description" name="description" placeholder="Descripcion" required>
+        </div>
+
+        <div class="form-group">
+        <label for="amount">Monto:</label>
+        <input type="number" id="amount" name="amount" placeholder="1000" required>
         </div>
 
         <div class="form-group">
