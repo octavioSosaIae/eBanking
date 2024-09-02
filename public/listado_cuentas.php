@@ -13,23 +13,12 @@ require_once __DIR__ . "/assets/template/header.php";
                 <th>Saldo</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1234-5678-9012</td>
-                <td>$10,000.00</td>
-            </tr>
-            <tr>
-                <td>9876-5432-1098</td>
-                <td>$5,500.00</td>
-            </tr>
-            <tr>
-                <td>1122-3344-5566</td>
-                <td>$3,250.00</td>
-            </tr>
+        <tbody id="accountsList">
         </tbody>
     </table>
 </section>
 
+<script src="assets/js/accountList.js"></script>
 <?php
     require_once __DIR__ . "/assets/template/footer.php";
 ?>
