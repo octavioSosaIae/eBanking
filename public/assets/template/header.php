@@ -19,7 +19,7 @@ if(!(isset($_SESSION['user_id'])) && !(isset($_SESSION['full_name']))){
     <!-- Barra lateral -->
     <aside class="sidebar">
         <div class="logo">
-            <h2>TB - Transaction Bank</h2>
+            <img src="./storage/images/logo.png">
         </div>
         <nav class="menu">
             <ul>

@@ -51,7 +51,7 @@ class Account
             $response = $conn->query($sql);
 
             $filas_afectadas = $conn->affected_rows;
-            
+
             if (!($filas_afectadas > 0)) {
                 return false;
             }
@@ -59,7 +59,7 @@ class Account
         } catch (Exception $e) {
             throw new Exception("Error al recargar la cuenta: " . $e->getMessage());
         }
-        
+
     }
 
 
@@ -101,8 +101,26 @@ class Account
             throw new Exception("Error al obtener las cuentas del usuario: " . $e->getMessage());
         }
 
+    }
 
+    function verifyAccount($account_id)
+    {
+        try {
+            $connection = new conn;
+            $conn = $connection->connect();
 
+            $sql = "SELECT u.full_name
+                    FROM users u
+                    JOIN accounts a ON u.user_id = a.user_id
+                    WHERE a.account_id = '$account_id';";
+                    
+            $response = $conn->query($sql);
+            $result = $response->fetch_assoc();
+
+            return $result;
+        } catch (Exception $e) {
+            throw new Exception("Error al obtener el nombre del usuario: " . $e->getMessage());
+        }
     }
 
 

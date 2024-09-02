@@ -20,8 +20,11 @@ switch ($function) {
     case "getAccounts":
         $accountController->getAccounts();
         break;
+
+    case "verifyAccount":
+        $accountController->verifyAccount();
+        break;
 }
-;
 
 
 class AccountController
@@ -104,4 +107,34 @@ class AccountController
         }
         $response->send();
     }
+
+
+    function verifyAccount()
+    {
+        try {
+            $response = new Response;
+
+            $account_id = $_POST['account_id'];
+
+            $result = (new Account())->verifyAccount($account_id);
+
+
+            $response->setStatusCode(200);
+            $response->setBody([
+                'success' => true,
+                'message' => 'Cuenta encontradas exitosamente.',
+                'data' => $result
+            ]);
+            
+        } catch (Exception $e) {
+
+            $response->setStatusCode(400);
+            $response->setBody([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
+        $response->send();
+    }
+
 }

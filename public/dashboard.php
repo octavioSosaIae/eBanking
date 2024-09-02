@@ -2,7 +2,6 @@
 require_once __DIR__ . "/assets/template/header.php";
 ?>
 
-
 <!-- Dashboard General -->
 <section id="dashboard" class="dashboard">
     <h1>Resumen de Cuentas</h1>
