@@ -1,10 +1,9 @@
 <?php
 
 
+class token{
 
-
-    //  Funcion para creacion de tokens
-
+        //  Funcion para creacion de tokens
 
     function createToken($username)
     {
@@ -45,5 +44,29 @@
 
             return null; //Token expiro
         }
-        
+        return $payload; //Token valido
     }
+
+
+    // Rutas //
+
+         if($_SERVER['REQUEST_METHOD']==='POST'&& $_SERVER['REQUEST_URI']==='app/token/token.php'){
+
+             $username = $_POST['username'];
+             $password = $_POST['password'];
+
+    
+
+             if($username = $username && $password = $password){
+
+                $token = createToken($username);
+                echo json_encode(['token'=>$token]);
+             }else{
+
+                http_response_code(401);
+                echo json_encode(['error'=>'credenciales invalidas']);
+             }
+
+         }
+
+}
