@@ -1,7 +1,7 @@
 const formChangePass = document.querySelector("#changePassword");
 const newPasswordInput = document.querySelector('#new_password');
 const confirmPasswordInput = document.querySelector('#confirm_password');
-//const profile =document.querySelector('#editar-perfil');
+const profile =document.querySelector('#editar-perfil');
 
 
 formChangePass.onsubmit = async (e) => {
