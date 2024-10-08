@@ -1,7 +1,7 @@
 <?php
 
 require_once "../core/Database.php";
-session_start();   
+session_start();
 
 class User
 {
@@ -18,7 +18,6 @@ class User
             $response = $conn->query($sql);
 
             return $response;
-
         } catch (Exception $e) {
             throw new Exception("Error al crear el usuario: " . $e->getMessage());
         }
@@ -35,7 +34,7 @@ class User
 
             $response = $conn->query($sql);
             $user = $response->fetch_assoc();
-            
+
             if (!password_verify($password, $user['password_hash'])) {
                 throw new Exception("Error al loguear el usuario: email o contraseña incorrecto");
             }
@@ -44,7 +43,6 @@ class User
             $_SESSION['full_name'] = $user['full_name'];
 
             return $user;
-
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -54,10 +52,10 @@ class User
 
     public function updateWithoutPassword($username, $email, $full_name, $phone)
     {
-        try {           
+        try {
             $connection = new conn;
             $conn = $connection->connect();
-                      
+
             $userId = $_SESSION['user_id'];
 
             $sql = "UPDATE users SET username = '$username', email = '$email', full_name = '$full_name', phone = '$phone' WHERE user_id = '$userId';";
